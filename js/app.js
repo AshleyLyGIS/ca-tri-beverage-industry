@@ -153,103 +153,103 @@ function drawLayerControl(breweryLayer, wineryLayer, otherLayer, currentYear) {
 
 }
 
-  // DRAW LEGEND
-  function drawLegend(data) {
+  // // DRAW LEGEND
+  // function drawLegend(data) {
     
-    // create Leaflet control for the legend
-    const legendControl = L.control({
-      position: 'bottomright'
-    });
+  //   // create Leaflet control for the legend
+  //   const legendControl = L.control({
+  //     position: 'bottomright'
+  //   });
 
-    // when the control is added to the map
-    legendControl.onAdd = function (map) {
+  //   // when the control is added to the map
+  //   legendControl.onAdd = function (map) {
 
-      // select the legend using id attribute of legend
-      const legend = L.DomUtil.get("legend");
+  //     // select the legend using id attribute of legend
+  //     const legend = L.DomUtil.get("legend");
 
-      // disable scroll and click functionality 
-      L.DomEvent.disableScrollPropagation(legend);
-      L.DomEvent.disableClickPropagation(legend);
+  //     // disable scroll and click functionality 
+  //     L.DomEvent.disableScrollPropagation(legend);
+  //     L.DomEvent.disableClickPropagation(legend);
 
-      // return the selection
-      return legend;
-    }
+  //     // return the selection
+  //     return legend;
+  //   }
    
-    // empty array to hold values
-    const dataValues = [];
+  //   // empty array to hold values
+  //   const dataValues = [];
 
-    // loop through all features 
-    data.features.forEach(function (layer) {
-      // for each year in a type
-      for (let year in layer.properties) {
-        // shorthand to each value
-        const value = layer.properties[year];
-        // if the value can be converted to a number 
-        // the + operator in front of a number returns a number
-        if (+value) {
-          //return the value to the array
-          dataValues.push(+value);
-        }
-      }
-    });
-    // verify your results!
-    console.log(dataValues);
+  //   // loop through all features 
+  //   data.features.forEach(function (layer) {
+  //     // for each year in a type
+  //     for (let year in layer.properties) {
+  //       // shorthand to each value
+  //       const value = layer.properties[year];
+  //       // if the value can be converted to a number 
+  //       // the + operator in front of a number returns a number
+  //       if (+value) {
+  //         //return the value to the array
+  //         dataValues.push(+value);
+  //       }
+  //     }
+  //   });
+  //   // verify your results!
+  //   console.log(dataValues);
 
-    // sort our array
-    const sortedValues = dataValues.sort(function (a, b) {
-      return b - a;
-    });
+  //   // sort our array
+  //   const sortedValues = dataValues.sort(function (a, b) {
+  //     return b - a;
+  //   });
 
-    // round the highest number and use as our large circle diameter
-    const maxValue = Math.round(sortedValues[0] / 1000) * 1000;
+  //   // round the highest number and use as our large circle diameter
+  //   const maxValue = Math.round(sortedValues[0] / 1000) * 1000;
 
-    console.log(maxValue);
+  //   console.log(maxValue);
 
-    // calc the diameters
-    const largeDiameter = calcRadius(maxValue) * 2,
-      smallDiameter = largeDiameter / 2;
+  //   // calc the diameters
+  //   const largeDiameter = calcRadius(maxValue) * 2,
+  //     smallDiameter = largeDiameter / 2;
 
-    // select our circles container and set the height
-    $(".legend-circles").css('height', largeDiameter.toFixed());
+  //   // select our circles container and set the height
+  //   $(".legend-circles").css('height', largeDiameter.toFixed());
 
-    // set width and height for large circle
-    $('.legend-large').css({
-      'width': largeDiameter.toFixed(),
-      'height': largeDiameter.toFixed()
-    });
+  //   // set width and height for large circle
+  //   $('.legend-large').css({
+  //     'width': largeDiameter.toFixed(),
+  //     'height': largeDiameter.toFixed()
+  //   });
 
-    // set width and height for small circle and position
-    $('.legend-small').css({
-      'width': smallDiameter.toFixed(),
-      'height': smallDiameter.toFixed(),
-      'top': largeDiameter - smallDiameter,
-      'left': smallDiameter / 2
-    })
+  //   // set width and height for small circle and position
+  //   $('.legend-small').css({
+  //     'width': smallDiameter.toFixed(),
+  //     'height': smallDiameter.toFixed(),
+  //     'top': largeDiameter - smallDiameter,
+  //     'left': smallDiameter / 2
+  //   })
 
-    // label the max and median value
-    $(".legend-large-label").html(maxValue.toLocaleString());
-    $(".legend-small-label").html((maxValue / 2).toLocaleString());
+  //   // label the max and median value
+  //   $(".legend-large-label").html(maxValue.toLocaleString());
+  //   $(".legend-small-label").html((maxValue / 2).toLocaleString());
 
-    // adjust the position of the large based on size of circle
-    $(".legend-large-label").css({
-      'top': -11,
-      'left': largeDiameter + 30,
-    });
+  //   // adjust the position of the large based on size of circle
+  //   $(".legend-large-label").css({
+  //     'top': -11,
+  //     'left': largeDiameter + 30,
+  //   });
 
-    // adjust the position of the large based on size of circle
-    $(".legend-small-label").css({
-      'top': smallDiameter - 11,
-      'left': largeDiameter + 30
-    });
+  //   // adjust the position of the large based on size of circle
+  //   $(".legend-small-label").css({
+  //     'top': smallDiameter - 11,
+  //     'left': largeDiameter + 30
+  //   });
 
-    // insert a couple hr elements and use to connect value label to top of each circle
-    $("<hr class='large'>").insertBefore(".legend-large-label")
-    $("<hr class='small'>").insertBefore(".legend-small-label").css('top', largeDiameter - smallDiameter - 8);
+  //   // insert a couple hr elements and use to connect value label to top of each circle
+  //   $("<hr class='large'>").insertBefore(".legend-large-label")
+  //   $("<hr class='small'>").insertBefore(".legend-small-label").css('top', largeDiameter - smallDiameter - 8);
 
-    legendControl.addTo(map);
+  //   legendControl.addTo(map);
 
     
-  } // end drawLegend()
+  // } // end drawLegend()
 
 
   // UPDATE CIRCLE SIZES
