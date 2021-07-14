@@ -1,1 +1,4 @@
 # ca-tri-beverage-industry
+
+My final project is a map of California's Beverage Industry Toxic Release Inventory. UI elements let the user look at the different beverage industry, as well as different years (from 2017-2019). I pulled the data from: https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-files-calendar-years-1987-2019?. For data wrangling, I created one CSV file data that contains the industry sector of beverage and removed unnecessary  data fields. My technology stack consists of HTML, CSS, JavaScript
+Click [here](https://ashleylygis.github.io/) to access my portfolio.
